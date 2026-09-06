@@ -25,6 +25,22 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     </div>
   </section>
 
+  <!-- 关于我 -->
+  <section class="py-10">
+    <h2 class="text-lg font-semibold text-ink">关于我</h2>
+    <p class="mt-3 text-sm leading-7 text-muted">
+      白天写代码，晚上写字。喜欢把重复的事情自动化，把复杂的问题拆简单；相信好的工具应该安静好用，好的文字应该诚实地记录。
+    </p>
+    <p class="mt-2 text-sm leading-7 text-muted">
+      折腾过命令行工具、静态站点和一点点数据可视化；最近在琢磨怎么把写作和发布变成同一条流水线。
+    </p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {['命令行', '自动化', '静态站点', '写作'].map((t) => (
+        <span class="rounded-full border border-line px-2.5 py-0.5 text-xs text-muted">{t}</span>
+      ))}
+    </div>
+  </section>
+
   <!-- 精选作品 -->
   {projects.length > 0 && (
     <section class="py-10">
