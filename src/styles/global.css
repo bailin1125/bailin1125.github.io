@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+@theme {
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-line: #21262d;
+  --color-ink: #e6edf3;
+  --color-muted: #8b949e;
+  --color-accent: #58a6ff;
+  --font-sans: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+}
+
+::selection {
+  background: #58a6ff44;
+}
