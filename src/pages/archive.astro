@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const byYear = new Map<number, typeof posts>();
+for (const p of posts) {
+  const y = p.data.pubDate.getFullYear();
+  byYear.set(y, [...(byYear.get(y) ?? []), p]);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+<BaseLayout title="归档" description="全部文章归档">
+  <section class="py-12">
+    <h1 class="text-2xl font-bold tracking-tight">归档</h1>
+    {years.map((year) => (
+      <div class="mt-8">
+        <h2 class="text-sm font-semibold text-muted">{year}</h2>
+        <ul class="mt-2 divide-y divide-line">
+          {byYear.get(year)!.map((p) => (
+            <li>
+              <a
+                href={`/blog/${p.id}/`}
+                class="flex items-baseline justify-between gap-4 py-2.5 text-ink transition-colors hover:text-accent"
+              >
+                <span>{p.data.title}</span>
+                <time datetime={p.data.pubDate.toISOString()} class="shrink-0 text-xs text-muted">
+                  {p.data.pubDate.toLocaleDateString('zh-CN', { month: '2-digit', day: '2-digit' })}
+                </time>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+</BaseLayout>
