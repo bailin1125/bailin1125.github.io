@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import TagList from '../components/TagList.astro';
+import Comments from '../components/Comments.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props { post: CollectionEntry<'blog'>; }
@@ -29,5 +30,6 @@ const date = pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long
                 [&_blockquote]:border-l-2 [&_blockquote]:border-line [&_blockquote]:pl-4 [&_blockquote]:text-muted">
       <slot />
     </div>
+    <Comments />
   </article>
 </BaseLayout>
