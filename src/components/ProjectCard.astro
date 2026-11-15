@@ -1,19 +1,30 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import StatusBadge from './StatusBadge.astro';
 interface Props { project: CollectionEntry<'projects'>; }
 const { project } = Astro.props;
-const { title, description, repo, url, tech } = project.data;
-const link = url ?? repo;
+const { title, description, status, tech, image } = project.data;
+const initials = title.replace(/[^A-Za-z\u4e00-\u9fff]/g, '').slice(0, 2).toUpperCase();
 ---
 <a
-  href={link}
-  target="_blank"
-  rel="noopener"
-  class="block rounded-lg border border-line bg-surface p-5 transition-colors hover:border-accent"
+  href={`/products/${project.id}/`}
+  class="group block overflow-hidden rounded-lg border border-line bg-surface transition-colors hover:border-accent"
 >
-  <div class="flex items-baseline justify-between gap-3">
-    <h3 class="font-semibold text-ink">{title}</h3>
-    {tech.length > 0 && <span class="text-xs text-muted">{tech.join(' · ')}</span>}
+  <div class="relative aspect-[16/10] overflow-hidden border-b border-line bg-bg">
+    {image ? (
+      <img src={image} alt={title} class="h-full w-full object-cover" loading="lazy" />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center">
+        <span class="select-none font-mono text-2xl font-bold tracking-widest text-muted/50">{initials}</span>
+      </div>
+    )}
   </div>
-  <p class="mt-2 text-sm text-muted">{description}</p>
+  <div class="p-5">
+    <div class="flex items-center justify-between gap-3">
+      <h3 class="font-semibold text-ink transition-colors group-hover:text-accent">{title}</h3>
+      <StatusBadge status={status} />
+    </div>
+    <p class="mt-2 text-sm text-muted">{description}</p>
+    {tech.length > 0 && <p class="mt-3 text-xs text-muted">{tech.join(' · ')}</p>}
+  </div>
 </a>

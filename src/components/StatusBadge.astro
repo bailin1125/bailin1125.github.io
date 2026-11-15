@@ -1,0 +1,16 @@
+---
+interface Props { status: 'live' | 'beta' | 'development' | 'self-use' | 'coming-soon'; }
+const { status } = Astro.props;
+
+const META: Record<Props['status'], { label: string; class: string }> = {
+  live: { label: '已上线', class: 'border-accent text-accent' },
+  beta: { label: '内测', class: 'border-accent text-muted' },
+  development: { label: '开发中', class: 'border-line text-muted' },
+  'self-use': { label: '自用', class: 'border-line text-muted' },
+  'coming-soon': { label: '即将上线', class: 'border-line text-muted' },
+};
+const meta = META[status];
+---
+<span class={`inline-flex shrink-0 items-center rounded-full border px-2 py-0.5 text-xs leading-4 ${meta.class}`}>
+  {meta.label}
+</span>
