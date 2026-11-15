@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="产品" description="我在做的产品与项目：火花快讯、第三战、AI 虚拟试衣等。">
+  <section class="py-12">
+    <h1 class="text-2xl font-bold tracking-tight text-ink">产品</h1>
+    <p class="mt-3 text-sm text-muted">正在做的、以及即将出现的。每个产品一页，讲清楚它解决什么问题。</p>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </section>
+</BaseLayout>
