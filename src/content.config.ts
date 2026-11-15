@@ -18,6 +18,10 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    status: z.enum(['live', 'beta', 'development', 'self-use', 'coming-soon']).default('development'),
+    longText: z.string().optional(),
+    features: z.array(z.string()).default([]),
+    image: z.string().optional(),
     url: z.string().url().optional(),
     repo: z.string().url().optional(),
     tech: z.array(z.string()).default([]),
