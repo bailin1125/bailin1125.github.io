@@ -15,15 +15,27 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 <BaseLayout>
   <!-- Hero -->
   <section class="py-20">
-    <h1 class="text-3xl font-bold tracking-tight">
-      你好，我是 <span class="text-accent">{SITE.name}</span>
-    </h1>
-    <p class="mt-4 text-muted">{SITE.description}</p>
-    <div class="mt-6 flex gap-4 text-sm">
-      <a href={`mailto:${SITE.email}`} class="text-accent hover:underline">发邮件给我</a>
+    <h1 class="text-4xl font-bold tracking-tight text-ink">{SITE.name}</h1>
+    <p class="mt-4 text-lg text-muted">{SITE.tagline}</p>
+    <div class="mt-8 flex flex-wrap items-center gap-4 text-sm">
+      <a href="#products" class="rounded-lg border border-accent px-4 py-2 text-accent transition-colors hover:bg-surface">看产品 →</a>
       <a href={SITE.github} target="_blank" rel="noopener" class="text-accent hover:underline">GitHub</a>
+      <a href={`mailto:${SITE.email}`} class="text-accent hover:underline">发邮件给我</a>
     </div>
   </section>
+
+  <!-- 产品精选 -->
+  {projects.length > 0 && (
+    <section id="products" class="py-10">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-lg font-semibold text-ink">产品</h2>
+        <a href="/products" class="text-sm text-accent hover:underline">全部 →</a>
+      </div>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  )}
 
   <!-- 关于我 -->
   <section class="py-10">
@@ -41,15 +53,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     </div>
   </section>
 
-  <!-- 精选作品 -->
-  {projects.length > 0 && (
-    <section class="py-10">
-      <h2 class="text-lg font-semibold text-ink">精选作品</h2>
-      <div class="mt-5 grid gap-4 sm:grid-cols-2">
-        {projects.map((p) => <ProjectCard project={p} />)}
-      </div>
-    </section>
-  )}
 
   <!-- 最新文章 -->
   <section class="py-10">
