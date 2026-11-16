@@ -13,10 +13,25 @@
 
 html {
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
   @apply bg-bg text-ink font-sans antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 锚点跳转避开 sticky 头部 */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* 键盘可达性：统一焦点环 */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 ::selection {

@@ -4,9 +4,9 @@ interface Props { post: CollectionEntry<'blog'>; }
 const { post } = Astro.props;
 const date = post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
 ---
-<a href={`/blog/${post.id}/`} class="group block border-b border-line py-4">
+<a href={`/blog/${post.id}/`} class="group block border-b border-line py-4 transition-colors hover:border-accent">
   <div class="flex items-baseline justify-between gap-4">
-    <h3 class="font-medium text-ink group-hover:text-accent">{post.data.title}</h3>
+    <h3 class="font-medium text-ink transition-colors group-hover:text-accent">{post.data.title} <span class="text-accent opacity-0 transition-opacity group-hover:opacity-100">→</span></h3>
     <time datetime={post.data.pubDate.toISOString()} class="shrink-0 text-xs text-muted">{date}</time>
   </div>
   <p class="mt-1 text-sm text-muted">{post.data.description}</p>

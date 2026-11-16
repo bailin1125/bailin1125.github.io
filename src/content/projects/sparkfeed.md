@@ -2,6 +2,7 @@
 title: 火花快讯 SparkFeed
 description: 每天 8:30 一封邮件：五源情报合成的商业点子，带变现测算与火花分。
 status: beta
+image: /products/sparkfeed.jpg
 longText: 火花快讯每天早上自动运行：从 GitHub 高分新项目、HackerNews 风向、国内科技财经 RSS 等五个来源抓取信号，LLM 合成 3 个带变现测算的商业点子，邮件送达。原则是假设显式、区间不点值、无数据标「未知」——绝不编造精确数字。目前内测运行中，即将开放订阅。
 features:
   - 五源情报：GitHub 新项目 / HackerNews / 国内科技财经 RSS
